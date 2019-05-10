@@ -9,7 +9,6 @@ const CharacterRow = props => {
   return (
     <tr className="character-row">
       <td>{props.name}</td>
-      {console.log("props are ", props)}
       <td>{props.race}</td>
       <td>{props.age}</td>
       <td>{props.weapon}</td>

@@ -20,7 +20,7 @@ const characters = {
 // To do
 
 /// fix click bug (reset array?) DONE
-/// add context TODO  https://tinkerylabs.com/react-context-api-with-hooks/
+/// add context DONE
 /// add character form TODO
 
 // Main function
@@ -52,7 +52,6 @@ function App () {
   function handleKillChar (e) {
     setKillName([...killName, e.target.id]) 
   }
-
   
   // maps characters onto an array of objects
   let filteredCharacters = charID.map(id => characters[id])
@@ -75,7 +74,6 @@ function App () {
     // Filters characters based on input text
     if (filterText) { 
       filteredCharactersDead = []
-      //console.log("filteredDead is ", filteredCharactersDead)
       filteredCharacters = filteredCharacters.filter(character => {
         return character.name.includes(filterText)
       })
@@ -84,12 +82,9 @@ function App () {
     // Filters characters based on ring click
     if (ringName) { 
       console.log("ringname is now ", ringName)
-      console.log("filteredchars are now ", filteredCharacters)
       filteredCharacters = filteredCharacters.filter(character => {
-        console.log("deleting ", ringName)
         return character.name !== ringName
       })
-      console.log("filteredchars are now now ", filteredCharacters)
     }
 
     // Creates the list of 'dead' characters
@@ -132,34 +127,21 @@ function App () {
     filteredCharactersDead
   }
 
-
-
     // Main render after characters have been filtered
     return (
   // add the context 
   <ShireContext.Provider value = {charsContext}>
-  {console.log("charsContext is ", charsContext)}
   <div className="App">
     <header className="App-header">
     <h2>Fellowship of the Ring</h2>
     <div className="container">
       
       <TableFilter // Creates the table filter box
-      //filterText={filterText} 
-      //handleChange={handleInputChange}
-      //placeHolder='Input search...'
       />
       {/*renders table*/}
       {(filteredCharacters.length + filteredCharactersDead.length) > 0 && 
       
-      <CharacterTable 
-      //characters={filteredCharacters}
-      //deadCharacters={filteredCharactersDead}
-      //handleRing={handleUseRing}
-      //ringName={ringName}
-      //handleKill={handleKillChar} 
-      //killName={killName}
-      /> } 
+      <CharacterTable/> } 
       
       {/*renders table with no hero */}
       {filteredCharacters.length === 0 && filteredCharactersDead.length === 0 && <div>No heroes....</div> } 
@@ -167,14 +149,12 @@ function App () {
       <GiveRing  
       giveRing={handleGiveRing} 
       ringName={ringName}/>
+      
     </div>
     </header>
   </div>
   </ShireContext.Provider>
     )
   }
-// } 
-
-
 
 export default App
