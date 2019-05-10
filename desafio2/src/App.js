@@ -5,7 +5,8 @@ import TableFilter from './components/TableFilter'
 import UseRing from './components/CharacterTable/UseRing'
 import CharacterTable from './components/CharacterTable'
 
-let characters = [
+// you could have used an object {} for this instead. 
+const characters = [
   { name: 'Gandalf', race: 'Maia', age: '2019', weapon: 'Staff 🏑'},
   { name: 'Aragorn', race: 'Human', age: '120', weapon: 'Sword ⚔'},
   { name: 'Legolas', race: 'Elf', age: '200', weapon: 'Bow 🏹'},
@@ -48,6 +49,16 @@ class App extends Component {
       killName: [ ...this.state.killName, e.target.id]
     }) 
   }
+
+  /* this.setState({
+      heroes: {
+        [id]: {
+          ...heroes[id],
+          status: 'dead'
+        }
+      }
+    
+    */
   
   render() {
 
