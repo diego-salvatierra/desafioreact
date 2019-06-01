@@ -8,6 +8,7 @@ import GiveRing from './components/CharacterTable/GiveRing'
 import CharacterTable from './components/CharacterTable'
 import CharacterForm from './components/CharacterForm'
 import { ShireContext } from './contexts' 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
 const characters = {
@@ -145,8 +146,12 @@ function App () {
       />
       {/*renders table*/}
       {(filteredCharacters.length + filteredCharactersDead.length) > 0 && 
-      
-      <CharacterTable/> } 
+      <Router>
+      <Link to='/characters/'>Characters</Link> 
+      <Route path='/characters/' component={CharacterTable} />
+      </Router>
+      // <CharacterTable/> 
+      } 
       
       {/*renders table with no hero */}
       {filteredCharacters.length === 0 && filteredCharactersDead.length === 0 && <div>No heroes....</div> } 

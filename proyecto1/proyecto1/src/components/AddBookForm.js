@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import useForm from '../hooks/useForm'
-import 'bulma/css/bulma.css'
-
+import { Button } from './../../node_modules/react-bulma-components'
 
 let input
 
 function AddBookForm ({addNewBook}) {
-  console.log("addNewBook is ", addNewBook)
 
     /*// create local state for form values
     const [newName, setNewName] = useState('')
@@ -17,8 +15,6 @@ function AddBookForm ({addNewBook}) {
 
     // Uses the useForm hook passing in the addNewBook as callback
     const {values, handleChange, handleSubmit, handleClear} = useForm(addNewBook)
-
-    console.log("values are ", values)
 
     return (
     <form onSubmit= {(e) => {
@@ -31,9 +27,9 @@ function AddBookForm ({addNewBook}) {
       <input className='input' name='year' placeholder = 'Year' value= {values.year} onChange = {handleChange}/>
       <input className='input' name='author' placeholder = 'Author' value= {values.author} onChange = {handleChange}/>
       <input className='input' name='description' placeholder = 'Description' value= {values.description} onChange = {handleChange}/>
-      <input className='button' type='submit' value='Add Book'/>
-      {/*<button className='button' value='Reset Form' onClick={handleClear}/>*/}
-      </form>    
+      <input type='submit' value='Add Book'/>
+      <button className="Button" value='Reset Form' onClick={handleClear}/>
+    </form>    
     )}
 
 export default AddBookForm
