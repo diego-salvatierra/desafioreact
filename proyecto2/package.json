@@ -2,12 +2,14 @@
   "name": "proyecto2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://diego-salvatierra.github.io/desafioreact",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.18",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "bulma": "^0.7.5",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
@@ -15,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build", 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

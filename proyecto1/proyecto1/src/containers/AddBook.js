@@ -5,21 +5,6 @@ import AddBookForm from './../components/AddBookForm'
 
 let input
 
-/*const AddBook = (props) => (
-  <form onSubmit={(e) => {
-          e.preventDefault()
-          console.log("has dispatched with value ", e.target.value)
-          props.dispatch(addBook(input.value))
-          input.value = ''
-      }}>
-    <input placeholder = 'Name' ref={node => {
-      input = node
-    }} />
-    <input type='submit' value='Add Book'/>
-  </form>    
-)*/
-
-
 const mapDispatchToProps = dispatch => {
   return {
     addNewBook: (name, year, author, description) => {

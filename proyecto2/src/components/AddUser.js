@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { RickContext } from '../contexts'
 
 
-const LoginForm = () => {
+const AddUser = () => {
     const context = useContext(RickContext)
 
     const [values, setValues] = useState({
@@ -25,49 +25,61 @@ const LoginForm = () => {
     
       const handleSubmit = (event) => {
         event.preventDefault()
-        const logIn = context.users.find(user => {
+
+        const userExists = context.users.find(user => {
           return (            
-            user.email === values.email &&
-            user.password === values.password
+            user.email === values.email ||
+            user.name === values.name
           )
         }
         )
 
-        //if log in successful
-        if (logIn) {
-          context.setLoggedIn(logIn)
-          alert('Login successful!')
+        if (userExists === undefined) {
+          context.addUsers(
+            [
+              ...context.users,
+             {
+              name: values.name,
+              password: values.password,
+              email: values.email
+             }
+            ]
+          )
         }
 
-        //if log in not successful
         else {
-          alert('Email and password do not match. Try again!')
-          context.setLoggedIn(null)
+          alert('Username or E-mail is already registered!')
         }
-
-        console.log("State is now", context)
-        // login(values.email, values.password)
+        
+        console.log("users are now ", context.users)
       }
 
       return (
         <form onSubmit={handleSubmit}>
           <input
+           type="name"
+           placeholder="Username"
+           name='name'
+           value={values['']}
+           onChange={handleChange}
+          />
+          <input
            type="email"
-           name='email'
            placeholder="E-mail"
+           name='email'
            value={values['']}
            onChange={handleChange}
           />
           <input
            type="password"
-           name='password'
            placeholder="Password"
+           name='password'
            value={values['']}
            onChange={handleChange}
           />
-          <button type='submit'>Login</button>
+          <button type='submit'>Register</button>
         </form>
       )
 }
 
-export default LoginForm
+export default AddUser

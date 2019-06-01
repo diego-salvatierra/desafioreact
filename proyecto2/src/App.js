@@ -10,6 +10,7 @@ import addFavorite from './reducers/addFavorite'
 import 'bulma/css/bulma.css'
 import ListCharacters from './components/ListCharacters'
 import LoginForm from './components/LoginForm'
+import AddUser from './components/AddUser';
 
 
 library.add(faHeart)
@@ -221,7 +222,8 @@ const App = props => {
 
           <Route path='/episodes/' component={ListEpisodes} /> 
           <Route path='/characters/' component={ListCharacters} /> 
-        </Router>        
+        </Router> 
+        <AddUser/>       
        </header>        
       </div>
     </RickContext.Provider>
