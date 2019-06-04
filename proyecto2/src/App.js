@@ -16,14 +16,35 @@ import AddUser from './components/AddUser';
 library.add(faHeart)
 
 // TODO 
-/// Connect API DONE
-/// Episodes list DONE
-/// Episode item DONE
-/// Add favorite DONE
-/// Delete favorite DONE
-/// See more
+/// Route if not logged in 
+/// Add same favorites page
+/// Add photos
+/// CSS for login forms
+/// Modal for new user
+/// Upload to gh-pages
 
 const App = props => {
+
+    // Set up login variables
+
+    const [loggedIn, setLoggedIn] = useState(null) 
+
+    const [users, addUsers] = useState([
+       {
+        name: 'Diego',
+        password: '910440',
+        email: 'diegosalva.ds@gmail.com',
+        favoriteList: [],
+        favoriteChars: []
+        },
+        {
+        name: 'Mische',
+        password: '710999',
+        email: 'mischekang@gmail.com',
+        favoriteList: [],
+        favoriteChars: []
+        }]
+    )
 
   // Connect episodes to API
 
@@ -118,50 +139,68 @@ const App = props => {
 
   const [favoriteList, setFavorite] = useReducer(addFavorite, [])
 
-  function makeFavorite (id) {
-    //console.log("id is ", id)
-    setFavorite({type: 'add', id: id})
-    console.log("favorite list after adding is ", favoriteList)
+  // function for updating favorite episode list for logged in user
+  function favoriteUpdate () {
+    // identify logged in user
+    const logInUser = users.find(user => {
+      return (            
+        user.name === loggedIn.name)
+    })
+
+    // update users' favorite list
+    addUsers(users.map((user) => {
+      if (logInUser.name === user.name) {
+        user.favoriteList = favoriteList
+      }
+      return user
+    }
+    ))
   }
-  
+
+  // Function to add a favorite
+  function makeFavorite (id) {
+    setFavorite({type: 'add', id: id})
+    favoriteUpdate()
+  }
+ 
+   // Function to remove a favorite
   function removeFavorite (id) {
-    console.log("attempting to remove ", id)
     setFavorite({type: 'remove', id: id})
-    console.log("favorite list after subtracting ", favoriteList)
+    favoriteUpdate()
   } 
 
   // Functions (actions) for adding favorite characters
 
   const [favoriteChars, setFavoriteChar] = useReducer(addFavorite, [])
 
+  // function for updating favorite character list for logged in user
+  function favoriteCharUpdate () {
+    // identify logged in user
+    const logInUser = users.find(user => {
+      return (            
+        user.name === loggedIn.name)
+    })
+
+    // update users' favorite list
+    addUsers(users.map((user) => {
+      if (logInUser.name === user.name) {
+        user.favoriteChars = favoriteChars
+      }
+      return user
+    }
+    ))
+  }
+
+  // Functions for adding and removing favorite chars
   function makeFavoriteChar (id) {
-    //console.log("id is ", id)
     setFavoriteChar({type: 'add', id: id})
-    console.log("favorite list after adding is ", favoriteChars)
+    favoriteCharUpdate()
   }
   
   function removeFavoriteChar (id) {
-    console.log("attempting to remove ", id)
     setFavoriteChar({type: 'remove', id: id})
-    console.log("favorite list after subtracting ", favoriteChars)
+    favoriteCharUpdate()
   }
-
-  // Set up login variables
-
-  const [loggedIn, setLoggedIn] = useState(null) 
-
-  const [users, addUsers] = useState([
-     {
-      name: 'Diego',
-      password: '910440',
-      email: 'diegosalva.ds@gmail.com'
-      },
-      {
-      name: 'Mische',
-      password: '710999',
-      email: 'mischekang@gmail.com'
-      }]
-  )
 
   // Initial state using Context
 
