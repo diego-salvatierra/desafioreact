@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/desafioreact/static/css/main.2cce8147.chunk.css",
+    "main.js": "/desafioreact/static/js/main.f9c425e7.chunk.js",
+    "main.js.map": "/desafioreact/static/js/main.f9c425e7.chunk.js.map",
+    "runtime~main.js": "/desafioreact/static/js/runtime~main.586bf084.js",
+    "runtime~main.js.map": "/desafioreact/static/js/runtime~main.586bf084.js.map",
+    "static/css/2.62908225.chunk.css": "/desafioreact/static/css/2.62908225.chunk.css",
+    "static/js/2.f9cb09fb.chunk.js": "/desafioreact/static/js/2.f9cb09fb.chunk.js",
+    "static/js/2.f9cb09fb.chunk.js.map": "/desafioreact/static/js/2.f9cb09fb.chunk.js.map",
+    "index.html": "/desafioreact/index.html",
+    "precache-manifest.33d226cc638b4df86e37676d453e536b.js": "/desafioreact/precache-manifest.33d226cc638b4df86e37676d453e536b.js",
+    "service-worker.js": "/desafioreact/service-worker.js",
+    "static/css/2.62908225.chunk.css.map": "/desafioreact/static/css/2.62908225.chunk.css.map",
+    "static/css/main.2cce8147.chunk.css.map": "/desafioreact/static/css/main.2cce8147.chunk.css.map"
+  }
+}
