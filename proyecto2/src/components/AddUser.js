@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import { RickContext } from '../contexts'
+import 'bulma/css/bulma.css'
 
 
 const AddUser = () => {
@@ -55,30 +56,32 @@ const AddUser = () => {
       }
 
       return (
+        <div><br></br><br></br> If not, register below:
         <form onSubmit={handleSubmit}>
-          <input
+          <input className='input'
            type="name"
            placeholder="Username"
            name='name'
            value={values['']}
            onChange={handleChange}
           />
-          <input
+          <input className='input'
            type="email"
            placeholder="E-mail"
            name='email'
            value={values['']}
            onChange={handleChange}
           />
-          <input
+          <input className='input'
            type="password"
            placeholder="Password"
            name='password'
            value={values['']}
            onChange={handleChange}
           />
-          <button type='submit'>Register</button>
+          <button className='button' type='submit'>Register</button>
         </form>
+        </div>
       )
 }
 

@@ -10,8 +10,9 @@ const CharacterBox = props => {
                         <FontAwesomeIcon icon='heart'/>
                     </div>
                     <div>
-                    Name: {props.character.name}
-                    </div>   
+                    {props.character.name}
+                    </div>
+                    <img src={props.character.image}/>
                 <button className="button is-danger is-rounded" onClick={() => props.removeFavorite(props.character.id)}>Remove from favorites</button>
             </div>
         )
@@ -20,8 +21,9 @@ const CharacterBox = props => {
         return (
             <div className='box'>
                     <div>
-                    Name: {props.character.name}
+                    {props.character.name}
                     </div>
+                    <img src={props.character.image}/>
                 <button className="button is-success is-rounded" onClick={() => props.makeFavorite(props.character.id)}>Add to favorites</button>
             </div>
         )

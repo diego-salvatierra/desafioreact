@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import addFavorite from './reducers/addFavorite'
 import 'bulma/css/bulma.css'
 import ListCharacters from './components/ListCharacters'
+import SameLikes from './components/SameLikes'
 import LoginForm from './components/LoginForm'
 import AddUser from './components/AddUser';
 
@@ -16,12 +17,13 @@ import AddUser from './components/AddUser';
 library.add(faHeart)
 
 // TODO 
+/// Favorites list per user DONE
 /// Route if not logged in 
-/// Add same favorites page
+/// Add same favorites page DONE
 /// Add photos
 /// CSS for login forms
 /// Modal for new user
-/// Upload to gh-pages
+/// Upload to gh-pages DONE
 
 const App = props => {
 
@@ -41,8 +43,8 @@ const App = props => {
         name: 'Mische',
         password: '710999',
         email: 'mischekang@gmail.com',
-        favoriteList: [],
-        favoriteChars: []
+        favoriteList: [3, 5],
+        favoriteChars: [4, 5]
         }]
     )
 
@@ -59,7 +61,6 @@ const App = props => {
   useEffect(() => {
     const getApi = async () => {
       const response = await axios.get('https://rickandmortyapi.com/api/episode/')
-      console.log("episode data is ", response.data.results)
 
       setEpisodes(response.data.results)
 
@@ -77,7 +78,6 @@ const App = props => {
 
     const { next, currentPage } = epPage
 
-    console.log("infoPage is now ", epPage)
 
     const response = await axios.get(next)
 
@@ -104,7 +104,6 @@ const App = props => {
    useEffect(() => {
      const getApi = async () => {
        const response = await axios.get('https://rickandmortyapi.com/api/character/')
-       console.log("character data is ", response.data.results)
  
        setCharacters(response.data.results)
  
@@ -119,8 +118,6 @@ const App = props => {
    }, [])
 
     const loadMoreChars = async () => {
-
-      console.log("infoPage is now ", charPage)
 
       const { next, currentPage } = charPage
 
@@ -141,15 +138,9 @@ const App = props => {
 
   // function for updating favorite episode list for logged in user
   function favoriteUpdate () {
-    // identify logged in user
-    const logInUser = users.find(user => {
-      return (            
-        user.name === loggedIn.name)
-    })
-
     // update users' favorite list
     addUsers(users.map((user) => {
-      if (logInUser.name === user.name) {
+      if (loggedIn.name === user.name) {
         user.favoriteList = favoriteList
       }
       return user
@@ -157,10 +148,24 @@ const App = props => {
     ))
   }
 
+   // Compare same likes
+
+   const [sameLikes, setSameLikes] = useState([])
+
+   function likeUpdate (id) {
+     setSameLikes(users.map((user) => {
+       if (user.favoriteList.includes(id) && (user.name !== loggedIn.name)) {
+         user = user.name
+       }
+     }
+     )
+   )}
+
   // Function to add a favorite
   function makeFavorite (id) {
     setFavorite({type: 'add', id: id})
     favoriteUpdate()
+    likeUpdate(id)
   }
  
    // Function to remove a favorite
@@ -175,15 +180,15 @@ const App = props => {
 
   // function for updating favorite character list for logged in user
   function favoriteCharUpdate () {
-    // identify logged in user
+    /*// identify logged in user
     const logInUser = users.find(user => {
       return (            
         user.name === loggedIn.name)
-    })
+    })*/
 
     // update users' favorite list
     addUsers(users.map((user) => {
-      if (logInUser.name === user.name) {
+      if (loggedIn.name === user.name) {
         user.favoriteChars = favoriteChars
       }
       return user
@@ -202,6 +207,7 @@ const App = props => {
     favoriteCharUpdate()
   }
 
+
   // Initial state using Context
 
   const rickContext = {
@@ -212,6 +218,7 @@ const App = props => {
     makeFavoriteChar,
     removeFavoriteChar,
     favoriteList,
+    sameLikes,
     favoriteChars,
     loadMoreEps,
     loadMoreChars,
@@ -223,7 +230,6 @@ const App = props => {
     addUsers
   }
 
-  console.log("rickContext is ", rickContext)
 
   // Main Render
 
@@ -231,15 +237,15 @@ const App = props => {
     <RickContext.Provider value = {rickContext}>
       <div className="App">
        <header className="App-header">
-        <LoginForm/>
         <Router>
-          
           <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
+              {!loggedIn &&
               <a className="navbar-item">
-              <Link to='/' className="button is-primary">HOME</Link> 
-              </a>
+              <Link to='/login' className="button is-primary">LOG IN</Link> 
+              </a>}
               <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -250,19 +256,26 @@ const App = props => {
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
                 <a className="navbar-item">
+                  <Link to='/login/' className="button is-danger" onClick={() => setLoggedIn(null)}>LOG OUT</Link> 
+                </a>
+                <a className="navbar-item">
                   <Link to='/episodes/' className="button is-info">Episodes</Link> 
                 </a>
                 <a className="navbar-item">
                   <Link to='/characters/' className="button is-info">Characters</Link> 
                 </a>
+                <a className="navbar-item">
+                  <Link to='/favorites/' className="button is-info">Similar tastes</Link> 
+                </a>
               </div>
             </div> }
           </nav>
-
+          <Route path='/login' component={LoginForm}/> 
+          <Route path='/login' component={AddUser}/> 
           <Route path='/episodes/' component={ListEpisodes} /> 
           <Route path='/characters/' component={ListCharacters} /> 
+          <Route path='/favorites/' component={SameLikes} /> 
         </Router> 
-        <AddUser/>       
        </header>        
       </div>
     </RickContext.Provider>

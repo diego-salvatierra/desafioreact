@@ -10,7 +10,7 @@ const EpisodeBox = props => {
                         <FontAwesomeIcon icon='heart'/>
                     </div>
                     <div>
-                    Name: {props.episode.name}
+                    {props.episode.name}
                     </div>   
                 <button className="button is-danger is-rounded" onClick={() => props.removeFavorite(props.episode.id)}>Remove from favorites</button>
             </div>
@@ -20,7 +20,7 @@ const EpisodeBox = props => {
         return (
             <div className='box'>
                     <div>
-                    Name: {props.episode.name}
+                    {props.episode.name}
                     </div>
                 <button className="button is-success is-rounded" onClick={() => props.makeFavorite(props.episode.id)}>Add to favorites</button>
             </div>

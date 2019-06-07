@@ -8,7 +8,6 @@ const ListEpisodes = () => {
     return (
             <div>
                 <div><br/><br/><br/></div>
-            {console.log("props are ", context)}
             {context.episodes.map((episode, index) => (
                 <EpisodeBox key={index} 
                 episode={episode} 

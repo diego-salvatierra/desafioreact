@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import { RickContext } from '../contexts'
+import 'bulma/css/bulma.css'
 
 
 const LoginForm = () => {
@@ -45,28 +46,29 @@ const LoginForm = () => {
           context.setLoggedIn(null)
         }
 
-        console.log("State is now", context)
         // login(values.email, values.password)
       }
 
       return (
+        <div> If registered, log in:
         <form onSubmit={handleSubmit}>
-          <input
+          <input className='input'
            type="email"
            name='email'
            placeholder="E-mail"
            value={values['']}
            onChange={handleChange}
           />
-          <input
+          <input className='input'
            type="password"
            name='password'
            placeholder="Password"
            value={values['']}
            onChange={handleChange}
           />
-          <button type='submit'>Login</button>
+          <button className='button' type='submit'>Login</button>
         </form>
+        </div>
       )
 }
 
