@@ -12,6 +12,8 @@ import ListCharacters from './components/ListCharacters'
 import SameLikes from './components/SameLikes'
 import LoginForm from './components/LoginForm'
 import AddUser from './components/AddUser';
+// import firebase from 'firebase'
+import getFirebase from "./firebase";
 
 
 library.add(faHeart)
@@ -24,6 +26,36 @@ library.add(faHeart)
 /// CSS for login forms
 /// Modal for new user
 /// Upload to gh-pages DONE
+
+// REVIEW
+/// Upload favorites right away
+/// Add quantity of same episodes
+/// Firebase signup DONE
+/// Firebase login
+/// Firebase add/remove chars
+/// Firebase add/remove episodes
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+/*const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
+};
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig);*/
+
+/*const firebase = getFirebase()
+if (firebase) {
+    // Do something
+    console.log("firebase success!");
+}*/
 
 const App = props => {
 
